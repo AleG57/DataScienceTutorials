@@ -6,4 +6,25 @@ Méthodes splines
 Clustering
 Arbres
 XGBoost
-Clustering
+NN supervisés
+NN non-supervisés
+Clustering (supervisé)
+Clustering (non supervisé)
+GAM
+PCA
+KNN
+Noyau de lissage
+CART
+RNN
+MLP
+DNN
+CNN
+LLM
+SVM
+SVR
+Elasticnet
+Ridge
+Lasso
+Régression de Poisson
+Régression linéaire
+Régression polynomiale
