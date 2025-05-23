@@ -16,7 +16,16 @@
 │   ├── SARIMA.ipynb
 │   ├── sarima_model.pkl
 │   └── src
-│       └── Electric_Production.csv
+│       ├── _analyse_facto.py
+│       ├── _clustering.py
+│       ├── Electric_Production.csv
+│       ├── ozone_complet.csv
+│       ├── __pycache__
+│       │   └── _regression_lineaire.cpython-313.pyc
+│       ├── _regression_lineaire.py
+│       ├── _regression_logistique.py
+│       ├── SAheart.csv
+│       └── spam.csv
 ├── Models.html
 ├── Pictures
 │   ├── BoxPlot.png
@@ -25,8 +34,6 @@
 ├── README.md
 └── src
     ├── _ADF.py
-    ├── _analyse_facto.py
-    ├── _clustering.py
     ├── Description.txt
     ├── Edges.txt
     ├── graph.py
@@ -39,17 +46,16 @@
     │   ├── _InverseDifferentiation.cpython-313.pyc
     │   ├── _regression_logistique.cpython-313.pyc
     │   └── _split_var_quali_quanti.cpython-313.pyc
-    ├── _regression_lineaire.py
-    ├── _regression_logistique.py
     ├── SAheart.csv
     ├── spam.csv
     └── _split_var_quali_quanti.py
 
-6 directories, 36 files
+7 directories, 40 files
 ```
 
 ## Recent Git Log
 ```
+048ebd8 adding models
 84d65c6 fixing autoviz and adding content on outliers tracking
 7647ae2 fixing bugs on AutoViz and plt.show
 3469aac adding content on AutoViz
