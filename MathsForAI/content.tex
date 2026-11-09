@@ -1,16 +1,197 @@
-\chapter{Formulation mathématique d'un \textit{dataset}}
+\chapter{Définitions générales}
 
+\section{Notations}
+
+\noindent Nous noterons, dans tout le document et sans ambiguïté, $\mathcal{Y}$ et $\mathcal{X}$ les espaces d'entrées (ou d'observation) et de sortie du modèle $h \in \mathcal{H}$ respectivement. 
+$\mathcal{H}$ est l'espace des hypothèses. En théorie de l'apprentissage statistique, un estimateur $h \in \mathcal{H}$ est une fonction de $\mathcal{X}$ dans $\mathcal{Y}$ qui donne une approximation de 
+la vérité terrain $\boldsymbol{y}$, que nous noterons $\hat{\boldsymbol{y}}$. Ainsi, $\hat{\boldsymbol{y}} = h(\boldsymbol{x}), \boldsymbol{x} \in \mathcal{X}$. C'est en d'autres termes la fonction de décision
+prise par le modèle pour approximer la valeur de $\boldsymbol{y}$. C'est une hypothèse faite par le modèle sur les données pour modéliser un comportement en tenant compte des données. \newline
+
+\noindent Notons que le modèle d'apprentissage peut être muni d'un ensemble de paramètres $\boldsymbol{\theta} \in \Theta$. Nous noterons alors un estimateur $h$ muni de paramètres 
+$\boldsymbol{\theta} \in \Theta \quad h_{\boldsymbol{\theta}} \in \mathcal{H}$. Nous disposons par conséquent de deux cas de figure, à savoir d'une part les modèles génératifs, notés $h_{\boldsymbol{\theta}} = h(\boldsymbol{\theta})$,
+qui génèrent une sortie sans réclamer de variable d'entrée $\boldsymbol{x} \in \mathcal{X}$, et d'autre part les modèles discriminatifs, qui, eux, réclament des données d'entrées $\boldsymbol{x}$ pour la classification ou régression. 
+Nous noterons alors les modèles discriminatifs $h_{\boldsymbol{\theta}}(\boldsymbol{x}) = h(\boldsymbol{\theta}, \boldsymbol{x})$. \newline
+
+\noindent En d'autres termes, les modèles génératifs modélisent la distribution conjointe $p(x,y)$ pour générer de nouveaux échantillons, tandis que les modèles discriminatifs modélisent la distribution conditionnelle $p(y | x)$ pour prédire ou 
+classifier un problème à partir de données d'entrée. \newline
+
+\noindent $\ell$ est la fonction de perte. C'est une mesure de l'écart entre la valeur prédite et la vérité terrain. 
+$\mathcal{R}_{\text{emp}}$ et $\mathcal{R}$ sont respectivement le risque empirique et le risque réel.  
+
+\begin{multicols}{2}
+
+\begin{itemize}
+    \item $\mathcal{X}$ : espace d'entrées (observations)
+    \item $\mathcal{Y}$ : espace des sorties 
+    \item $\mathcal{H}$ : espace des hypothèses
+    \item $\Theta$ : espace des paramètres
+    \item $h_{\boldsymbol{\theta}}$ : fonction de décision ou estimateur
+    \item $\ell$ : fonction de perte
+    \item $\mathcal{R}_{\text{emp}}$ : risque empirique
+    \item $\mathcal{R}_{S}$ : risque réel
+\end{itemize}
+
+\end{multicols}
 
 \newpage
 
+\section{Fonction de perte}
+
+\noindent La fonction de perte est la fonction qui permet de mesurer l'écart entre la valeur prédire \textit{a priori} et la valeur réelle à trouver (la vérité terrain). Mathématiquement, $\ell$ est une fonction telle que \newline
+ 
+\begin{equation}
+    \ell : \begin{array}[t]{rcl} 
+    \mathcal{Y} \times \mathcal{Y} & \longrightarrow & \mathbb{R} \\ 
+    (\boldsymbol{y}, \hat{\boldsymbol{y}}) & \longmapsto & \ell(\boldsymbol{y},  \hat{\boldsymbol{y}}) = \ell(\boldsymbol{y}, h(\boldsymbol{x}))
+    \end{array}
+\end{equation}
+
+\vspace{1em}
+
+\noindent En pratique, cette fonction doit pouvoir être mesurable d'espérance définie, de telle sorte à optimiser le risque \ref{sec:risk}. Pour un problème de régression linéaire, nous utilisons usuellement la méthode des moindres carrés, à savoir 
+
+\begin{equation}
+    \ell_{\text{OLS}}(\boldsymbol{y}, \underbrace{\hat{\boldsymbol{y}}}_{h(\boldsymbol{x})}) = \frac{1}{n}\sum_{i=1}^{n} (\underbrace{\hat{y_i}}_{h(x_i)} - y_i)^2 \nonumber
+\end{equation}
+
+\noindent Nous avons donc dans ce cas particulier $\boldsymbol{y} \in \mathcal{Y} = \mathbb{R}^{n}$ et $\boldsymbol{x} \in \mathcal{X} = \mathbb{R}^{d}$ avec $n$ et $d$ deux entiers pas nécéssairement égaux.
+
+\section{Fonction de décision}
+
+\noindent La fonction de décision est une fonction qui prend en paramètres les données et paramètres du modèle et retourne une valeur qui correspond à l'estimateur $\hat{\boldsymbol{y}}$ de $\boldsymbol{y}$. 
+C'est la fonction globale du modèle, ou fonction de transfert, qui établit la relation entre l'entrée et la sortie du modèle. En apprentissage profond, cette fonction n'est pas à confondre avec la fonction 
+d'activation qui représente la dernière étape de l'architecture d'un modèle d'apprentissage profond.
+
+\begin{equation}
+    h_{\boldsymbol{\theta}} : \begin{array}[t]{rcl} 
+    \Theta \times \mathcal{X} & \longrightarrow & \mathcal{Y} \\ 
+    (\boldsymbol{\theta}, \boldsymbol{x}) & \longmapsto & h_{\boldsymbol{\theta}}(\boldsymbol{x}) = h(\boldsymbol{\theta}, \boldsymbol{x})
+    \end{array}
+\end{equation} 
+
+\vspace{1em}
+
+\noindent A titre d'exemple, pour une régression linéaire, $h_{\boldsymbol{\theta}}(\boldsymbol{x}) = \boldsymbol{\omega}^T \boldsymbol{x} + b$, avec $T$ l'opérateur transpose sur $\mathbb{R}$. Par conséquent 
+$\boldsymbol{\theta} = (\boldsymbol{\omega}, b) \in \mathbb{R}^d \times \mathbb{R}$. L'espace des hypothèses, $\mathcal{H}$, est l'ensemble de ces fonctions de décision.
+
+\begin{equation}
+    \mathcal{H} = \left\{ h_{\boldsymbol{\theta}} | \boldsymbol{\theta} \in \Theta \right\}
+\end{equation}
+
+\noindent Pour une régresion linéaire dont les données d'entrées sont $\boldsymbol{x} = (x_1, x_2)^T$, les poids de la régression et le biais, i.e. les paramètres $\boldsymbol{\theta} = ((\omega_1, \omega_2)^T, b)$ valent 
+\textit{a posteriori} $\boldsymbol{\theta} = (( 1 ; 4)^T, 2)$ (vérité terrain), nous aurions 
+
+\begin{align}
+    \mathcal{H} &= \left\{ h_{\boldsymbol{\theta}} = \boldsymbol{\omega}^T \boldsymbol{x} + b \quad | \quad \boldsymbol{\theta} = (\boldsymbol{\omega}, b) \in \Theta \right\}    \nonumber \\
+                &= \left\{ (x_1, x_2) \mapsto \omega_1 x_1 + \omega_2 x_2 + b \quad | \quad \boldsymbol{\theta} = (\omega_1, \omega_2, b) \in \Theta \right\}                     \nonumber
+\end{align}
+
+\noindent avec des estimateurs $h_{\boldsymbol{\theta}_i}$ dont les paramètres seraient $((1,1 ; 3,95)^T; 2,2)$, $((1,5; 3,8)^T; 2,01)$ ou $((0,5; 4,3)^T; 2,1)$ par exemple. Parmis tout ces estimateurs, le meilleur est celui qui minimise 
+le risque empirique \ref{sec:risk} sur l'ensemble des paramètres $\boldsymbol{\theta}$, le risque réel n'étant pas accessible. 
+
+\newpage
+
+\noindent Pour un problème d'appprentissage profond, nous considérons un réseau de neuronnes à $L$ couches, d'entrée $\boldsymbol{x} \in \mathbb{R}^{n_0}$ et de sortie $\boldsymbol{y} \in \mathbb{R}^{n_L}$, $n_l$ étant le nombre de neuronnes 
+à la couche $l$. La sortie de la couche $l \in \{1;L\}$ (représentation intermédiaire) est 
+
+\begin{equation}
+    h^{(l)} = \sigma_l \left( W_l h^{(l-1)} + b_l \right) \in \mathbb{R}^{n_l} \nonumber
+\end{equation}
+
+\vspace{1em}
+
+\noindent avec $\sigma_l$ la fonction d'activation (tanh, sigmoïde, ReLU), $W_l \in \mathbb{R}^{n_l \times n_{l-1}}$ la matrice des poids, $b_l \in \mathbb{R}^{n_l}$ le vecteur des bais de la couche $l$.
+Il vient que $h^{(0)} = \boldsymbol{x}, h^{(1)} = \sigma_{1} \left( W_1 h^{(0)} + b_1 \right)$, $ h^{(2)} = \sigma_{2} \left( W_2 h^{(1)} + b_2 \right)$, ..., $h^{L} = \sigma_{L} \left( W_L h^{(L-1)} + b_L \right) = h_{\boldsymbol{\theta}}$. 
+$\sigma_l$ est par conséquent une fonction d'activation, ou de sortie locale, mais n'est pas la fonction de décision (fonction globale) que nous pouvons réécrire comme 
+
+\begin{equation}
+    h_{\boldsymbol{\theta}}(\boldsymbol{x}) = (\sigma_L \circ g_L \circ \ldots \circ \sigma_1 \circ g_1) (\boldsymbol{x}) \nonumber
+\end{equation}
+
+\vspace{1em}
+
+\noindent Avec $g_l(\boldsymbol{z}) = W_l \boldsymbol{z} + b_l$ et $\boldsymbol{\theta} = \left( W_1, b_1, \dots, W_L, b_L \right)$.
+
+\section{Risque}
+\label{sec:risk}
+\subsection{Risque réel}
+
+\noindent Soit $D$ la distribution \textit{a priori} inconnue des données 
+
+\subsection{Risque empirique}
+
+\subsection{Un problème d'optimisation}
+
+La fonction de perte est la fonction objectif que nous cherchons à minimiser. Le  Fondamentalement, un problème d'apprentissage automatique se ramène à un problème d'optimisation \ref{sec:pb_optim}
+
+
+\section{Définition formelle d'un jeu de données}
+
+\noindent Soit $\mathcal{D}$ un jeu de données (ou \textit{dataset}) de $N$ échantillons (ou réalisations) i.i.d, $J$ variables, i.e. 
+
+\begin{equation}
+    \mathcal{D} \stackrel{\text{def}}:=
+    \{ (X_i, y_i) \quad | \quad x_i, y_i \in \mathcal{X} \times \mathcal{Y}, \quad \forall i \in {\mathbb{N}} \}
+\end{equation}
+
+Avec : \newline
+
+\begin{itemize}
+    \item $X_i \in \mathbb{R}^n, X_i = (x_{i,1}, \dots, x_{i,J})$ : $i$-ème échantillon du dataset, $i \in \{1;N\}$.
+    \item $y_i \in \mathbb{R}$ : $i$-ème réalisation de la variable cible. C'est la variable que nous cherchons à modéliser. \newline
+\end{itemize}
+
+\noindent Ainsi, $\mathcal{D} = (\boldsymbol{X}, \boldsymbol{y})$ avec $\boldsymbol{X} = (X_i)_{i \in \{1;n\}}$ et $\boldsymbol{y} = (y_i)_{i \in \{1;n\}}$
+
+\begin{equation}
+    \boldsymbol{X} = 
+    \begin{bmatrix}
+    x_{1,1} & \dots & x_{1,J} \\
+    \vdots & x_{i,j} & \vdots \\
+    x_{n,1} & \dots & x_{n,J} \\
+    \end{bmatrix} \quad \boldsymbol{y} = 
+    \begin{bmatrix}
+    y_{1} \\
+    \vdots \\
+    y_{n} \\
+    \end{bmatrix}
+\end{equation}
+
+\vspace{1em}
+
+\noindent $\mathcal{X}$ et $\mathcal{Y}$ sont respectivement les ensembles d'observation et de sortie du \textit{dataset}. Dans le cadre de notre étude, $\boldsymbol{y}$ est la colonne du jeu de données 
+qui correspond à la puissance totale ($kW$). Pour $\boldsymbol{X} \in \mathcal{X}$, c'est la matrice qui contient toutes les réalisation des variables évoquées précédement \ref{ref:features}. 
+Les élément $x_{i,j}$ (nombres réels, entiers, texte) représentent une réalisation (échantillon $i$) de chaque variable $j \in \{ 1;J \}$. 
+
+\chapter{Les différents types d'apprentissage}
+\section{Apprentissage supervisé}
+
+\section{Apprentissage non supervisé}
+
+\section{Apprentissage auto-supervisé}
+
+\section{Apprentissage semi-supervisé}
+
+\section{Apprentissage par renforcement}
+
 \chapter{Métriques}
-\section{Régression}
+\section{Introduction}
+
+\noindent Les métriques sont des indices de performance pour les modèles utilisés en apprentissage automatique (et aussi des fonctions de perte). Elles servent notament à vérifier que la prédiction faite par le modèle est juste. En effet, 
+plus la métrique a un bon score, plus le modèle tend à être performant. En revanche, un score très élevé sur les données d'entraînement mais très faible sur les données de validation (test) peu indiquer 
+un cas de surapprentissage ou de fuite de données. \newline
+
+\noindent Les métriques sont différentes en fonction du problème posé. En effet,  
+
+\section{Métriques usuelles pour les problèmes de régression}
+
+Soient $\boldsymbol{y}, \boldsymbol{y}^{'} \in \mathcal{Y} = \mathbb{R}^{N}$, $h \in \mathcal{H}$ et $\boldsymbol{x} \in \mathcal{X}$ tel que $\boldsymbol{y}^{'} = h(x)$ avec $\boldsymbol{y} = [y_1, \dots, y_N]$
 
 \begin{itemize}
 
     \item \textbf{Mean Absolute Error} : 
         \begin{equation}
-            MSE(Y) = \frac{1}{n}\sum_{i = 1}^{n}|y_{i} - \hat{y_{i}}|
+            L_{\text{MSE}}(\boldsymbol{y}, ) = \frac{1}{n}\sum_{i = 1}^{n}|y_{i} - \hat{y_{i}}|
         \end{equation} \\
     \item \textbf{Root Mean Squarred Error} : 
         \begin{equation}
@@ -20,13 +201,13 @@
     \item 
 \end{itemize}
 
-\section{Classification}
+\section{Métriques usuelles pour les problèmes de classification}
 
 \begin{itemize}
 
     \item \textbf{Accuracy score} : 
         \begin{equation}
-            \text{Accuracy} = \frac{VP + VN}{VP + VN + FN + FP} = 1 - exactitude
+            \text{Accuracy} = \frac{VP + VN}{VP + VN + FN + FP} = 1 - \text{exactitude}
         \end{equation} 
 
     Avec : \newline
@@ -250,3 +431,399 @@ AR                   & Séries temporelles                                      
 \end{tabularx}
 \caption{Synthèse des modèles de Machine Learning - réduction de dimension}
 \end{table}
+
+
+
+\chapter{Mathématiques complémentaires}
+\label{sec:match_compl}
+
+\section{Motivations}
+
+\noindent L'objectif de ce chapitre est de donner des notions, termes et concepts mathématiques permettant de faciliter la compréhension globale des mathématiques dissimulés derrière l'apprentissage automatique
+et la mise en application des modèles d'IA.
+
+\section{Distance, normes et produits scalaires}
+
+\subsection{Distance}
+
+\noindent Une distance est une application de $E \times E$ dans $\mathbb{R}^{+}$ tel que \newline
+
+\begin{itemize}
+    \item $\forall x, y \in E, d(x,y) = d(y,x)$ (symétrie) \newline
+    \item $\forall x, y \in E, d(x,y) = 0 \Longleftrightarrow x = y$ (séparation) \newline
+    \item $\forall x, y \in E, d(x,y) \le d(x,z) + d(y,z)$ (inégalité triangulaire) \newline
+\end{itemize}
+
+\subsection{Norme} 
+
+\noindent Une norme est une application de $E$ dans $\mathbb{R}^{+}$ tel que \newline
+
+\begin{itemize}
+    \item $\forall x \in E, \mathcal{N}(x) = 0 \implies x =  0_E$ (séparation) \newline
+    \item $\forall \lambda, x \in K \times E, \mathcal{N}(\lambda x) = |\lambda| \mathcal{N}(x)$ (homogénéité) \newline
+    \item $\forall x, y \in E, \mathcal{N}(x + y) \le \mathcal{N}(x) + \mathcal{N}(y)$ (inégalité triangulaire) \newline
+\end{itemize}
+
+\newpage
+
+\subsection{Produit scalaire} 
+
+\noindent Un produit scalaire est une application bilinéaire semie définie positive, i.e. \newline
+
+\begin{itemize}
+    \item $\forall x,y \in E, \langle x, y \rangle = \langle y, x \rangle$ (symétrie) \newline
+    \item $x \in E, \langle x, x \rangle = 0 \Longleftrightarrow x = 0_E$ (définie) \newline
+    \item $x \in E, \langle x, x \rangle \le 0$ (positive) \newline
+\end{itemize}
+
+\noindent Le produit scalaire est définit de la manière suivante pour deux vecteurs $x$ et $y$ dans $\mathbb{R}^n$
+
+\begin{equation}
+    \langle x, y \rangle = \sum_{i=1}^{n} x_i y_i
+\end{equation}
+
+\noindent La norme et la distance euclidienne découlent du produit scalaire de la manière suivante
+
+\begin{equation}
+    || x || = \sqrt{\langle x, x \rangle}
+\end{equation}
+
+\begin{equation}
+    d(x,y) = || x - y ||
+\end{equation}
+
+\subsection{Produit hermitien}
+
+\noindent Le produit scalaire hermitien étend la notion de produit scalaire pour le coprs des complexes. C'est une application sesquilinéaire définie positive symétrique hermitienne de $H \times H$ dans $\mathbb{C}$, i.e.
+
+\begin{itemize}
+    \item $\forall x, y \in H, \mu \in \mathbb{C}, \langle x, \mu y \rangle = \mu \langle x, y \rangle$ (linéaire relativement au second argument pour la sesquilinéarité à gauche) \newline
+    \item $\forall x, y \in H, \lambda \in \mathbb{C}, \langle \lambda x, y \rangle = \bar{\lambda} \langle x, y \rangle$  (semi-linéaire relativement au premier argument pour la sesquilinéarité à gauche) \newline
+    \item $\forall x, y \in H, \langle x, \mu y \rangle = \bar{\langle y, \mu x \rangle}$ (symétrique hermitienne) \newline
+    \item $\forall x \in E, \langle x, x \rangle \in \mathbb{R}^{+}$ (positive) \newline
+    \item $\forall x \in E, \langle x, x \rangle = 0 \Longleftrightarrow x = 0_H$ (définie) \newline
+\end{itemize}
+
+\noindent Une application semi-linéaire respecte les conditions suivantes 
+
+\begin{itemize}
+    \item $\forall x, y \in E, f(x + y) = f(x) + f(y)$ \newline
+    \item $\forall x \in E, \lambda \in \mathbb{C}, f(\lambda x) = \bar{\lambda} f(x)$ \newline
+\end{itemize}
+
+\section{Topologie}
+\subsection{Complétude.} 
+
+\noindent Un espace $E$ est complet si toute suite de Cauchy converge dans $E$. Une suite de Cauchy est une suite réelle ou complexe $(u_n)_{n \in \mathbb{N}}$ telle que 
+
+\begin{equation}
+    \forall \epsilon > 0, \exists N \in \mathbb{N}, \forall p, q \ge N, |u_p - u_q| < 0
+\end{equation}
+
+\noindent Intuitivement, les points qui se rapprochents de plus en plus les uns les autres forment une suite qui converge vers une limite qui existe et se trouve à l'intérieur de $E$. Autrement dit, il n'y a aucun trou dans $E$. \newline 
+
+\subsection{Corps commutatif.} 
+
+\noindent Un corps commutatif (ou tout simplement un corps) $(\mathbb{K}, +, \times)$ est un ensemble muni de deux lois internes (souvent $+$ et $\times$, rendant possibles les opérations d'addition, de soustraction, de multiplication et de division). Ces lois doivent vérifier les conditions suivantes : \newline
+
+\begin{itemize}
+    \item $(\mathbb{K}, +)$ forme un groupe abélien (groupe dont la loi est commutative, i.e. $\forall a,b \in E, a + b = b + a$) dont l'élément neutre est noté 0 \newline
+    \item $(\mathbb{K} \ {0}, \times)$ forme un groupe abélien (ici, $\forall a,b \in E, a \times b = b \times a$) dont l'élément neutre est noté 1 \newline
+    \item La multiplication est distributive par rapport à l'addition, i.e. $a \times (b + c) = a \times b + a \times c$ et $(b + c) \times a = b \times a + c \times a$ \newline
+\end{itemize}
+
+\noindent $(\mathbb{R}, +, \times)$ et $(\mathbb{C}, +, \times)$ sont des corps commutatifs que l'on note abusivement $\mathbb{R}$ et $\mathbb{C}$. \newline
+
+\newpage
+
+\subsection{Espace topologique.}
+
+\noindent Nous pouvons définir une topologie $T$ sur un ensemble $E$ si $T$ est un ensemble de parties de $E$ qui vérifie :
+
+\begin{itemize}
+    \item $E \in T$ et $\emptyset \in T$ \newline
+    \item $T$ est stable par intersection finie, i.e. si $U_1, U_2 \in T$, alors $U_1 \cap U_2 \in T$ \newline
+    \item $T$ est stable par réunion quelconque, i.e. si $\forall i \in \mathcal{I}, U_i \in T$, alors $\bigcup_{n \in \mathbb{N}} U_i \in T$ \newline
+\end{itemize}
+
+\noindent Les espaces topologiques permettent, lorsque nous les munissons d'outils géométriques et algébriques, d'engendrer des espaces plus riches. Notons que les ensembles permettent de construire une topologie et non l'inverse. \newline
+
+\subsection{Espace métrique.} 
+
+\noindent Un espace métrique est un couple $(E, d)$ ou $E$ est un ensemble et $d$ une distance. \newline
+
+\subsection{Espace vectoriel normé.} 
+
+\noindent Soit $\mathbb{K}$ un corps commutatif muni d'une valeur absolue et non discret ($\mathbb{R}$ ou $\mathbb{C}$). Un $\mathbb{K}$-espace vectoriel normé est un couple $(V,\mathcal{N})$ ou $E$ est un $\mathbb{K}$-espace vectoriel et $\mathcal{N}$ une norme. \newline
+
+\subsection{Espace euclidien.} 
+
+\noindent Un espace euclidien est un espace vectoriel de dimension finie (par conséquent complet) $(E, \langle ., . \rangle)$ sur le corps des réels dont la norme découle d'un produit scalaire. \newline
+
+\subsection{Espace hermitien.}
+
+\noindent Un espace hermitien est un espace vectoriel de dimension finie sur le corps des complexes (par conséquent complet) $(\mathcal{H}, \langle . , . \rangle)$ dont la norme découle d'un produit (scalaire) hermitien. \newline
+
+
+\subsection{Espace de Banach.}
+
+\noindent Un espace de Banach est un espace vectoriel normé sur le corps des complexes dont la distance est issue de sa norme. \newline 
+
+\subsection{Espace de Hilbert ou hilbertien et préhilbertien.} 
+
+\noindent Un espace hilbertien est un espace euclidien ou hermitien de dimension finie ou infinie. C'est le cas le plus général. Notons qu'un espace hilbertien est forcément complet, ce qui n'est pas garanti pour un espace préhilbertien. Les espaces hermitiens et euclidien sont complets car de dimension finie et hermitiens. 
+La notion de complétude est en effet plus ambigue pour les espaces de dimension infinie. \newline
+
+\subsection{Espace ouvert et fermé.} 
+
+\noindent Il existe plusieurs définitions d'un espace ouvert en fonction de quel élément est muni l'espace considéré. Dans un cas général ou cet espace est topologique, démuni d'une norme ou un produit sclaire par exemple, un sous ensemble $U$ de $E$ est un ouvert de $E$
+pour la topologie $T$ si et seulement si $U \in T$. $T$ devient l'ensemble des ouverts de $E$ selon $T$.
+
+\newpage
+
+\begin{itemize}
+    \item Pour les espaces métriques, un espace ouvert $U \subset E$ est une une boule ouverte définie par : $B(a, r) = \left\{ x \in E \quad | \quad d(a,r) < r \right\}$. Les boules fermées sont définies par $B(a, r) = \left\{ x \in E \quad | \quad d(a,r) < r \right\}$ \newline
+
+    \item Pour les espaces de Hilbert, un une partie $U \subset \mathcal{H}$ est ouverte si elle est le voisinage de chacun de ses points. Pour la notion de topologie forte, (les notions de topologie forte et faible ont étés introduites pour les espaces de dimension infinie), la définition du voisinage est la suivante
+    
+    \begin{equation}
+        \forall \boldsymbol{x} \in U \subset \mathcal{H}, \exists r > 0, B(\boldsymbol{x}, r) \subset U, \quad B(\boldsymbol{x}, r) = \left\{ y \in \mathcal{H}, ||x - y|| = d(x,y) < r \right\}
+    \end{equation}
+
+    \noindent Pour la topologie faible, la notion de voisinage est la suivante
+
+    \begin{equation}
+        \boldsymbol{\mathcal{V}}(\boldsymbol{x}) = \left\{ \boldsymbol{y} \in \mathcal{H}, | \langle \boldsymbol{y} - \boldsymbol{x}, \boldsymbol{h}_i \rangle | < \epsilon, i \in \llbracket 1,n \rrbracket, \boldsymbol{h}_i \in \mathcal{H} \right\}
+    \end{equation}
+
+\end{itemize}
+
+\subsection{Espace $L^p$}
+
+\noindent Un espace $L^{p}$, ou espace de Lebesgue, est un espace vectoriel de la classe des fonctions d'exposant $p > 0$ intégrable au sens de Lebesgue. La norme dans cet espace est 
+
+\begin{equation}
+    ||f||_{p} = \left( \int_{a}^{b} |f(t)|^{p} dt \right)^{\frac{1}{p}}
+\end{equation}
+
+\noindent La définition s'étend à la notion de fonctions mesurables sur un espace mesuré $(X, \mathcal{A}, \mu)$
+
+\begin{equation}
+    ||f||_{p} = \left( \int_{a}^{b} |f|^{p} d\mu \right)^{\frac{1}{p}}
+\end{equation}
+
+\subsection{Espace de Sobolev.}
+
+\noindent Un espace de Sobolev est un espace fonctionnel (ensemble d'applications d'un espace $\mathcal{X}$ vers un espace $\mathcal{Y}$, i.e. un espace vectoriel de fonctions) dont la norme est obtenue par la combinaison de la normle $L^p$. La notion d'espace de Sobolev intervient notament lors de l'étude des dérivées droites ou partielles d'une fonction. C'est également un espace de Banach
+Soient $\Omega$ un ouvert de $\mathbb{R}^n$, $p \in [1;+\infty]$ et $m$ un entier naturel. On défnit l'espace de Sobolev par 
+
+\begin{equation}
+    W^{m,p} = \left\{ u \in L^{p}(\Omega) \quad | \quad \forall \alpha, |\alpha| \le m, \quad D^{\alpha}u \in L^p(\Omega) \right\}
+\end{equation}
+
+\noindent Avec $D^{\alpha}u$ une dérivée partielle de $u$ au sens des distribution (faible). La norme pour cet espace est définie par 
+
+\begin{equation}
+    || u ||_{W^{m,p}} = 
+    \begin{cases}
+        \left( \sum_{|\alpha| \le m } || D^{\alpha}u ||_{L^{p}}^{p} \right) ^{\frac{1}{p}} & \text{si} 1 \quad \le p \le +\infty  \\
+        \max_{|\alpha| \le m} || D^{\alpha}u ||_{\infty} & \text{si} \quad p = +\infty
+    \end{cases}
+\end{equation}
+
+\subsection{Notion de voisinage.}
+
+\noindent Soit $E$ un espace topologique et $\boldsymbol{a} \in E$. Une partie $V$ de $E$ est un voisinage de $\boldsymbol{a}$ si et seulement si il existe un ouvert $U$ tel que :
+
+\begin{equation}
+    \boldsymbol{a} \in U \subset V
+\end{equation}
+
+\noindent Nous notons $\boldsymbol{\mathcal{V}}(\boldsymbol{a})$ l'ensemble des voisinages de $\boldsymbol{a}$. Par conséquent, nous remarquons les propriétés suivantes : 
+
+\begin{itemize}
+    \item $V \in \boldsymbol{\mathcal{V}}(\boldsymbol{a}) \wedge V \subset W \subset E \implies W \in \boldsymbol{\mathcal{V}}(\boldsymbol{a})$ \newline
+    \item $(V, W) \in (\boldsymbol{\mathcal{V}}(\boldsymbol{a}))^{2} \implies V \cap W \in \boldsymbol{\mathcal{V}}(\boldsymbol{a})$ \newline
+    \item $E \in \boldsymbol{\mathcal{V}}(\boldsymbol{a})$ \newline
+    \item $\emptyset \in \boldsymbol{\mathcal{V}}(\boldsymbol{a})$ \newline 
+\end{itemize}
+
+\noindent A titre d'exemple, sur la droite réelle $\mathbb{R}$, un voisinage de $x \in \mathbb{R}$ est l'ensemble $]x - \epsilon; x + \epsilon[, \epsilon > 0$. D'après les conséquences de la définition, en prennant $U = V = E$, $\mathbb{R}$ est un voisinage de tout point $x$ de $\mathbb{R}$. \newline
+
+\section{Intégrabilité}
+\subsection{Intégrabilité (Riemann).}
+
+\noindent Une fonction $f : \mathcal{I} \rightarrow \mathbb{K}$ est dite intégrable au sens de Riemann si $\int_{\mathcal{I}} |f|$ existe, i.e. nous notons
+$\forall c \in \mathcal{I}, \phi_c : \mathcal{I} \leftarrow \mathbb{R}, x \longrightarrow \int_{c}^{x}|f|$, $f$ est Riemann-intégrable si et seulement si $\forall c \in \mathcal{I}, \phi_c$ admet des limites en $a$ et en $b$ et $\exists c \in \mathcal{I}, \phi_c$ admette des limites finies en $a$ et en $b$. \newline
+
+\subsection{Intégrabilité (Lebesgue).} 
+
+\noindent L'intégrale de Lebesgue est une généralisation de l'intégrale de Riemann permettant d'étendre la notion d'intégrale à des ensembles plus généraux que $\mathbb{R}$ ou $\mathbb{R}^n$. Soient $(X, \mathcal{A}, \mu)$ un espace mesuré. Soit $f$ une fonction $\mathcal{A}$-mesurable de $X$ dans 
+$\bar{\mathbb{R}}$ ou $\mathbb{C}$. $f$ est Lebesgue-intégrable si 
+
+\begin{equation}
+    \int_{X} |f(x)| d\mu(x) < +\infty
+\end{equation}
+
+\section{Distributions.}
+\subsection{Support compact.} 
+
+\noindent Le support d'une fonction $f$ est un ensemble d'éléments dont l'image de $f$ par $x \in X$ est non nulle. Autrement dit, $\bar{ \texttt{supp}(f) = \left\{ x \in X, \quad f(x) \neq 0 \right\} }$. Soit un espace métrique $(X, d)$. $(X,d)$ est un compact si et seulement si $\forall (x_n)_{n \in \mathbb{N}}$, 
+il existe une sous suite $(x_{n_{k}})$ qui converge dans $X$. La conséquence de cette définition est que, en dimension finie, un tel espace est un fermé borné. \newline
+
+\subsection{Fonction test}
+
+\noindent Une fonction test est une fonction de classe $C^{\infty}$ à support compact que nous noterons $K$. Par exemple, la fonction 
+
+$\phi(x) = \begin{cases} 
+    e^{\frac{-1}{1-x^2}} \quad \text{si} |x| < 1 \\ 
+    0 \quad \text{sinon} 
+\end{cases}$ 
+est une fonction test. \newline
+
+\subsection{Théorie des distributions.} 
+
+\noindent Une distribution est une généralisation de la notion de fonction et de mesure. Cette extension permet notament de dériver des fonctions discontinues ou mal définies au sens classique de la dérivation. Contrairement à la définition classique d'une fonction qui évalue la valeur de l'image point
+par point, une distribution calcule une moyenne des valeurs d'une fonction dans un domaine resserré autour du point d'étude. Les moyennes sont pondérées et conduisent à étudier une expression de la forme 
+
+\begin{equation}
+    I_{f}(\phi) = \int_{\mathbb{R}} f(x)\phi(x)dx 
+\end{equation}
+
+\newpage
+
+\noindent La fonction à évaluer est $f : \mathbb{R} \rightarrow \mathbb{R}$ une fonction localement intégrable et $\phi : \mathbb{R} \rightarrow \mathbb{R}$ une fonction indéfiniment dérivable appelée fonction test. \newline
+
+\section{Théorie de l'apprentissage}
+
+\subsection{Apprentissage PAC.} 
+
+\noindent La notion de voisinage renvoie à un ensemble qui peut être aussi grand que l'on souhaite, sous réserve d'être au plus de la même taille que $E$. Selon la théorie de l'apprentissage PAC (Probablement Approximativement Correct), 
+nous définissons un estimateur $h$ de la vérité terrain $\boldsymbol{a}$ dans l'espace latent $E = \mathcal{Y}$ comme une fonction de $\mathcal{X}$ dans $\mathcal{Y}$ tel que $h(\boldsymbol{x}) = \hat{\boldsymbol{a}}$, $\boldsymbol{x}$ étant le vecteur d'entrée $\boldsymbol{x} \in \mathcal{X}$ 
+et $\boldsymbol{â} \in \mathcal{Y}$ un estimateur de $\boldsymbol{a} \in \mathcal{Y}$. La meilleure estimation de $\boldsymbol{a}$ est noté $\boldsymbol{a}^{*}$ associé au meilleur estimateur $h^{*}$ du modèle $M$ vérifie la condition suivante 
+
+\begin{equation}
+    \boldsymbol{a}^{*} = \text{arg} \min_{h \in \mathcal{H}} \mathcal{R}_S (h) = \text{arg} \min_{\hat{\boldsymbol{a}}, \boldsymbol{a} \in \mathcal{Y}^2} \mathbb{E} \left[ L(\boldsymbol{a}, \hat{\boldsymbol{a}}) \right] \nonumber
+\end{equation}
+
+L'algorithme $A$ fournit un bon estimateur de la solution si et seulement si il a l'apprentissage PAC, i.e.
+
+\begin{equation}
+    \mathbb{P} \left( \boldsymbol{a}^{*} \in \mathcal{V}(\boldsymbol{a}) \right) \ge 1 - \epsilon, \quad \epsilon > 0
+\end{equation}
+
+\noindent Si le voisinage $\boldsymbol{\mathcal{V}}(\boldsymbol{a})$ peut prendre la taille de $E$, alors cette probabilité tend vers 1, même pour le pire estimateur de $\boldsymbol{a}$. Cette définition est par conséquent incomplète car nous devons, par nécéssité, 
+contrôler la taille de $\boldsymbol{\mathcal{V}}(\boldsymbol{a})$. Pour cela, nous munissons de l'espace topologique $E$ une distance $d$ qui permet de restreindre $\mathcal{V}(\boldsymbol{a})$ à une boule ouverte $B$ tel que :
+
+\begin{equation}
+    \boldsymbol{\mathcal{V}}(\boldsymbol{a}) = B(\boldsymbol{a}^*, \eta) = \{ \boldsymbol{z} \in E \mid d(\boldsymbol{z}, \boldsymbol{a}^*) < \eta \}
+\end{equation}
+
+\noindent La définition d'un algorithme $A$ aillant l'apprentissage PAC complète prend alors la forme :
+
+\begin{equation}
+    \mathbb{P} \left( \boldsymbol{a}^{*} = h^{*}(\boldsymbol{x}) \in B(\boldsymbol{a}, \eta) \right) \ge 1 - \epsilon, \quad \epsilon > 0
+\end{equation}
+
+\vspace{10mm}
+
+\section{Complétude, tribu, mesure}
+
+\subsection{Complémentarité.} 
+
+\noindent Soit $E$ un espace vectoriel. Soient $F$ et $G$ deux espaces dans $E$. $G$ et $F$ sont complémentaires si et seulement si 
+
+\begin{itemize}
+    \item $\forall f \in F, \forall g \in G, f + g = e \in E$, i.e. $F + G = E$ \newline
+    \item $F \cap G = \{0\}$ \newline
+\end{itemize}
+
+\noindent Dans ce cas, nous notons le complémentaire de $F$ $F^{c}$ et par conséquent $F^{c} = G$. Il en va de même que $G^{c} = F$, et nous écrivons que $F$ et $G$ sont en somme directe, à savoir que $F \oplus G = E$ \newline
+
+\subsection{Tribu.} 
+
+\noindent Si $\mathcal{A}$ est un tribu sur $X$, alors $\mathcal{A}$ est un ensemble non vide de parties de $X$ stable par passage au complémentaire et par union dénombrable, i.e.
+
+\begin{itemize}
+    \item $\mathcal{A}$ contient $\varnothing$ \newline
+    \item $\forall B \in \mathcal{A}, B^{c} \in \mathcal{A}$ ($B^{c}$ est le complémentaire de $B$ dans $\mathcal{A}$) \newline
+    \item Si, $\forall n \in \mathbb{N}, B_n \in \mathcal{A}$ alors $\bigcup_{n \in \mathbb{N}} B_n \in \mathcal{A}_n$ \newline
+\end{itemize}
+
+\subsection{Espace mesurable} 
+
+\noindent Un espace mesurable est un couple $(X, \mathcal{A})$, $\mathcal{A}$ tribu sur $X$. $a \in \mathcal{A}$ est un ensemble mesurable de $X$. Nous ajoutons une mesure $\mu$ qui permet de construire un espace mesuré $(X, \mathcal{A}, \mu)$ \newline
+
+\subsection{Tribu image réciproque}
+
+\noindent Soient $(X_1, \mathcal{A}_1)$ et $(X_2, \mathcal{A}_2)$ deux espaces mesurables et $f$ une application $f : X_1 \rightarrow X_2$, la tribu image réciproque de $\mathcal{A_2}$ sous $f$ est l'ensemble $f^{-1}(\mathcal{A}_2)$ définit par : 
+
+\begin{equation}
+    f^{-1}(\mathcal{A}_2) = \left\{ f^{-1}(\mathcal{A}_2) | \mathcal{A}_2 \in X_2 \right\}
+\end{equation}
+
+$f^{-1}(\mathcal{A}_2)$ est une tribu sur $X_1$.
+
+\subsection{Fonction mesurable}
+
+\noindent Une fonction $f : E \rightarrow F$ est $(\mathcal{E}, \mathcal{F})$-mesurable si la tribu image réciproque par $f$ de la tribu $\mathcal{F}$ est incluse dans $\mathcal{E}$, c'est à dire si :
+
+\begin{equation}
+    \forall B \in \mathcal{F}, \quad f^{-1}(B) \in \mathcal{E} \nonumber
+\end{equation}
+
+\subsection{Fonction différentiable.} 
+
+\noindent Soit $f$ définie sur un ouvert $U$ de $\mathbb{R}^n$ à valeurs dans $\mathbb{R}^{p}$. Soit $\boldsymbol{a} \in U$. $f$ est différentiable en $\boldsymbol{a}$ si et seulement si $\exists ! L : \mathbb{R}^n \rightarrow \mathbb{R}^p$ tel que 
+
+\begin{equation}
+    f(\boldsymbol{a} + h) =_{0} f(\boldsymbol{a}) + L(h) + o(||h||) 
+\end{equation}
+
+\noindent Si $L$ existe, alors $L$ est la différentielle de $f$ en $\boldsymbol{a}$, et nous notons $L = df(\boldsymbol{a})$. De plus, $f$ est différentiable en $U$ si et seulement si $\forall \boldsymbol{a} \in U$, $f$ est différentiable en $\boldsymbol{a}$. A titre d'exemple, sur $\mathbb{R}$, nous retrouvons la définition
+fondamentale de la dérivée, à savoir que l'on a $f(a+h) = f(a) + L(h) + o(h)$, soit
+
+\begin{equation}
+    lim_{h \rightarrow 0} \frac{f(a+h) - f(h)}{h} = L(a) = f'(a)
+\end{equation}
+
+\subsection{Gradient.} 
+
+\noindent Soit $f$ une fonction de $\mathbb{R}^{n}$ dans $\mathbb{R}^{n}$. Le gradient de $f$ en $\boldsymbol{x} \in \mathbb{R}^{n}$, noté $\nabla f$, est donné par la définition suivante 
+
+\begin{equation}
+    \nabla f(\boldsymbol{x}) = \left[ \frac{\partial f}{\partial x_1}(\boldsymbol{x}), \dots , \frac{\partial f}{\partial x_n}(\boldsymbol{x}) \right]^{T}
+\end{equation}
+
+\subsection{Application Lipschitzienne.} 
+
+\noindent Soit $E$ une partie de $\mathbb{R}$ et $f : E \rightarrow \mathbb{R}$. $f$ est $k$-Lipschitzienne si et seulement si $\forall (x, y) \in E^2$, 
+
+\begin{equation}
+    | f(x) - f(y) | \le k|x - y|
+\end{equation}
+
+\subsection{$\nabla f$ Lipschitz continuité.} 
+
+\noindent $f$ est $\nabla f$ Lipschitz-continue sur $\mathcal{I}$ si et seulement si $\forall \boldsymbol{x}, \boldsymbol{y} \in \mathcal{I}, || \nabla f(\boldsymbol{x})  - \nabla f(\boldsymbol{y}) || \le L || \boldsymbol{x} - \boldsymbol{y} ||, L > 0$ \newline
+
+\newpage
+
+\section{Autre}
+
+\subsection{Théorème fondamental des splines de lissage - Théorème de représentation.}
+
+\noindent Pour un problème d'optimisation avec terme de régularisation dans un espace de fonctions de dimension infinie, il y a existence et unicité d'une solution dans un espace de dimension finie dont la solution est une fonction spline. \newline
+
+\noindent Le terme de régularisation par la dérivée $m$-ième de la fonction à minimiser garanti une solution unique par une spline d'ordre $2m-1$. Autrement dit, soient un ensemble de $N$ observations (noeuds) distincts $(x_i, y_i)_{i \in mathbb{N}^{*}}$, $\mathcal{H}_m([a;b])$ un espace de Sobolev de fonctions définies sur $[a;b]$ 
+dont les dérivées sont absolument continues jusqu'à l'odre $m-1$ et la dérivée $m$-ième est de carré intégrable, i.e. $f^{(m)} \in \mathcal{L}_2([a;b])$ alors $\exists! \hat{f}, $
+
+\begin{equation}
+    \forall \lambda > 0, \quad \hat{f} = \text{arg} \min_{f \in \mathcal{H}_m([a;b])} \sum_{i=1}^{N} (y_i - \underbrace{f(x_i)}_{= \hat{y}_i})^{2} + \lambda \int_{a}^{b} (f^{(m)}(x))^2 dt
+\end{equation}
+
+\noindent et $\hat{f}$ est une spline d'ordre $2m-1$, i.e.
+
+\begin{equation}
+    \forall x \in [a;b], \quad \hat{f}(x) = \sum_{i=0}^{m-1} \beta_i x^i + \sum_{i=1}^{N} \gamma_i \underbrace{(x - x_i)_{+}^{2m-1}}_{= \max(0, x - x_i)^{2m-1}}
+\end{equation}

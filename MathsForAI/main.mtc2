@@ -1,2 +1,5 @@
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.1}Régression}{\reset@font\mtcSfont 3}{section.2.1}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.2}Classification}{\reset@font\mtcSfont 3}{section.2.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.1}Apprentissage supervisé}{\reset@font\mtcSfont 7}{section.2.1}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.2}Apprentissage non supervisé}{\reset@font\mtcSfont 7}{section.2.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.3}Apprentissage auto-supervisé}{\reset@font\mtcSfont 7}{section.2.3}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.4}Apprentissage semi-supervisé}{\reset@font\mtcSfont 7}{section.2.4}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {2.5}Apprentissage par renforcement}{\reset@font\mtcSfont 7}{section.2.5}}

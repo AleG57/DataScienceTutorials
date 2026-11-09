@@ -1,0 +1,41 @@
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.1}Motivations}{\reset@font\mtcSfont 14}{section.5.1}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.2}Distance, normes et produits scalaires}{\reset@font\mtcSfont 14}{section.5.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.2.1}Distance.}{\reset@font\mtcSSfont 14}{subsection.5.2.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.2.2}Norme.}{\reset@font\mtcSSfont 14}{subsection.5.2.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.2.3}Produit scalaire}{\reset@font\mtcSSfont 14}{subsection.5.2.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.2.4}Produit hermitien}{\reset@font\mtcSSfont 16}{subsection.5.2.4}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.3}Topologie}{\reset@font\mtcSfont 16}{section.5.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.1}Complétude.}{\reset@font\mtcSSfont 16}{subsection.5.3.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.2}Corps commutatif.}{\reset@font\mtcSSfont 16}{subsection.5.3.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.3}Espace topologique.}{\reset@font\mtcSSfont 18}{subsection.5.3.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.4}Espace métrique.}{\reset@font\mtcSSfont 18}{subsection.5.3.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.5}Espace vectoriel normé.}{\reset@font\mtcSSfont 18}{subsection.5.3.5}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.6}Espace euclidien.}{\reset@font\mtcSSfont 18}{subsection.5.3.6}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.7}Espace hermitien.}{\reset@font\mtcSSfont 18}{subsection.5.3.7}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.8}Espace de Banach.}{\reset@font\mtcSSfont 18}{subsection.5.3.8}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.9}Espace de Hilbert ou hilbertien et préhilbertien.}{\reset@font\mtcSSfont 18}{subsection.5.3.9}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.10}Espace ouvert et fermé.}{\reset@font\mtcSSfont 19}{subsection.5.3.10}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.11}Espace $L^p$}{\reset@font\mtcSSfont 20}{subsection.5.3.11}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.12}Espace de Sobolev.}{\reset@font\mtcSSfont 20}{subsection.5.3.12}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.3.13}Notion de voisinage.}{\reset@font\mtcSSfont 21}{subsection.5.3.13}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.4}Intégrabilité}{\reset@font\mtcSfont 21}{section.5.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.4.1}Intégrabilité (Riemann).}{\reset@font\mtcSSfont 21}{subsection.5.4.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.4.2}Intégrabilité (Lebesgue).}{\reset@font\mtcSSfont 21}{subsection.5.4.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.5}Distributions.}{\reset@font\mtcSfont 21}{section.5.5}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.5.1}Support compact.}{\reset@font\mtcSSfont 21}{subsection.5.5.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.5.2}Fonction test}{\reset@font\mtcSSfont 22}{subsection.5.5.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.5.3}Théorie des distributions.}{\reset@font\mtcSSfont 22}{subsection.5.5.3}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.6}Théorie de l'apprentissage}{\reset@font\mtcSfont 23}{section.5.6}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.6.1}Apprentissage PAC.}{\reset@font\mtcSSfont 23}{subsection.5.6.1}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.7}Complétude, tribu, mesure}{\reset@font\mtcSfont 23}{section.5.7}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.1}Complémentarité.}{\reset@font\mtcSSfont 23}{subsection.5.7.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.2}Tribu.}{\reset@font\mtcSSfont 24}{subsection.5.7.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.3}Espace mesurable}{\reset@font\mtcSSfont 24}{subsection.5.7.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.4}Tribu image réciproque}{\reset@font\mtcSSfont 24}{subsection.5.7.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.5}Fonction mesurable}{\reset@font\mtcSSfont 24}{subsection.5.7.5}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.6}Fonction différentiable.}{\reset@font\mtcSSfont 24}{subsection.5.7.6}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.7}Gradient.}{\reset@font\mtcSSfont 25}{subsection.5.7.7}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.8}Application Lipschitzienne.}{\reset@font\mtcSSfont 25}{subsection.5.7.8}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.7.9}$\nabla f$ Lipschitz continuité.}{\reset@font\mtcSSfont 25}{subsection.5.7.9}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {5.8}Autre}{\reset@font\mtcSfont 26}{section.5.8}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {5.8.1}Théorème fondamental des splines de lissage - Théorème de représentation.}{\reset@font\mtcSSfont 26}{subsection.5.8.1}}
